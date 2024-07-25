@@ -9,7 +9,7 @@
 4. (Optional) cobra-cli - [https://github.com/spf13/cobra](https://github.com/spf13/cobra)
 
 
-# How to use
+## How to use
 
 1. Clone this repo
 2. Replace the text `go-htmx-template` with the name of `<your go module>` in all file if exists 
@@ -17,3 +17,10 @@
 4. run `task mod gen`
 5. Start your server `task dev`
 6. Open: [http://localhost:8888/go-htmx](http://localhost:8888/go-htmx) (config in `.env` file)
+
+
+## with client
+
+1. `cd client`
+2. `pnpm install`
+3. `pnpm build`
