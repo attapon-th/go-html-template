@@ -19,6 +19,19 @@
 6. Open: [http://localhost:8888/go-htmx](http://localhost:8888/go-htmx) (config in `.env` file)
 
 
+## How to RUN for Dev
+
+1. Shell 1 Run server and watch for changes
+    ```sh
+    task dev -w
+    ```
+2. Shell 2 Run generate template
+    ```sh
+    task client-gen -w
+    ```
+
+
+
 ## with client
 
 1. `cd client`

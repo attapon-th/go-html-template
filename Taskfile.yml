@@ -33,21 +33,28 @@ tasks:
 
   dev:
     cmds:
-      - mkdir -p build
-      - task: teml-gen
-      - go run --ldflags="{{.GO_LDFLAGS}}" main.go serv
+      - go build --ldflags="{{.GO_LDFLAGS}}" -o ./{{.APP_NAME}}_dev main.go
+      - ./{{.APP_NAME}}_dev serv
 
-  gen:
-    - task teml-gen client-gen
+    interval: "1000ms" # ignore
+    sources:
+      - "**/*.go"
+      - "go.mod"
 
   teml-gen:
-    - templ generate
+    cmds:
+      - templ generate
+    interval: "1000ms" # ignore
+    sources:
+      - "views/**/*.templ"
 
   client-gen:
     dir: client
     cmds:
       - test -d node_modules || npm install
       - pnpm build
+  gen:
+    - task teml-gen client-gen
 
   mod:
     cmds:
