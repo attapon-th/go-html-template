@@ -25,9 +25,9 @@
     ```sh
     task dev -w
     ```
-2. Shell 2 Run generate template
+2. Shell 2 Run compile and watch
     ```sh
-    task client-gen -w
+    task pnpm-watch
     ```
 
 

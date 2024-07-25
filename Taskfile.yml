@@ -35,26 +35,39 @@ tasks:
 
   dev:
     cmds:
+      - task templ
       - go build --ldflags="{{.GO_LDFLAGS}}" -o ./{{.APP_NAME}}_dev main.go
       - ./{{.APP_NAME}}_dev serv
     sources:
+      - "views/**/*.templ"
       - "**/*.go"
       - "go.mod"
+      - exclude: "views/**/*.go"
 
-  teml-gen:
+  templ:
     cmds:
       - templ generate
+    sources:
+      - "views/**/*.templ"
 
-  client-gen:
+  pnpm-build:
+    aliases:
+      - pb
     dir: client
     cmds:
       - test -d node_modules || npm install
       - pnpm build
+
+  pnpm-watch:
+    aliases:
+      - pw
+    dir: client
+    cmds:
+      - pnpm build:watch
+
   gen:
     cmds:
-      - task teml-gen client-gen --parallel
-    sources:
-      - "views/**/*.templ"
+      - task --parallel templ pnpm-build
 
   mod:
     cmds:
@@ -65,6 +78,7 @@ tasks:
   build:
     cmds:
       - mkdir -p build
+      - task gen
       - |
         CGO_ENABLED=0 GOOS=linux go build \
         -a -gcflags="-m" --ldflags="-w -s {{.GO_LDFLAGS}}" \
