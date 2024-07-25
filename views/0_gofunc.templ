@@ -1,0 +1,17 @@
+package views
+
+import "path"
+
+var BaseURL = ""
+
+func GetPathStr(u string) string {
+	return path.Join(BaseURL, u)
+}
+
+func GetPathSafeURL(u string) templ.SafeURL {
+	return templ.SafeURL(GetPathStr(u))
+}
+
+templ HelloWorld() {
+	<span>HelloWorld</span>
+}

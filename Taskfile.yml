@@ -1,0 +1,75 @@
+# https://taskfile.dev
+
+version: "3"
+
+dotenv: # auto load dotenv
+  - .env
+vars:
+  APP_NAME: go-html-template # please change me
+  APP_VERSION: "4.0"
+  APP_BUILD:
+    sh: echo "$(git rev-list --count --all || echo \"0\")"
+  APP_TS:
+    sh: date -Is || echo "2023-10-04T12:43:08+07:00"
+  GO_MODULE:
+    sh: go list || echo "{{.APP_NAME}}"
+  GO_LDFLAGS: |
+    -X '{{.GO_MODULE}}/cmd.AppName={{.APP_NAME}}' \
+    -X '{{.GO_MODULE}}/cmd.Version={{.APP_VERSION}}.{{.APP_BUILD}}' \
+    -X '{{.GO_MODULE}}/cmd.TS={{.APP_TS}}' \
+
+  DOCKER_IMAGE: "{{.APP_NAME}}"
+  DOCKER_TAG: "{{.APP_VERSION}}.{{.APP_BUILD}}"
+
+tasks:
+  default:
+    cmds:
+      - task --list-all
+    silent: true
+
+  version:
+    cmds:
+      - go run --ldflags="{{.GO_LDFLAGS}}" main.go version
+
+  dev:
+    cmds:
+      - mkdir -p build
+      - task: teml-gen
+      - go run --ldflags="{{.GO_LDFLAGS}}" main.go serv
+
+  gen:
+    - task teml-gen client-gen
+
+  teml-gen:
+    - templ generate
+
+  client-gen:
+    dir: client
+    cmds:
+      - pnpm build
+
+  mod:
+    cmds:
+      - go mod download
+      - go mod tidy
+      - go mod vendor
+
+  build:
+    cmds:
+      - mkdir -p build
+      - |
+        CGO_ENABLED=0 GOOS=linux go build \
+        -a -gcflags="-m" --ldflags="-w -s {{.GO_LDFLAGS}}" \
+        -o ./build/{{.APP_NAME}} main.go
+
+  docker-build:
+    cmds:
+      - task: build
+      - |
+        docker build \
+        -f docker/Dockerfile \
+        --build-arg APP_NAME={{.APP_NAME}} \
+        --tag {{.DOCKER_IMAGE}}:latest \
+        .
+  docker-push:
+    - docker push {{.DOCKER_IMAGE}}:latest

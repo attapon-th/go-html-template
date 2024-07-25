@@ -1,0 +1,21 @@
+package views
+
+templ Navbar() {
+	<nav class="navbar z-50 h-16 grow-0 flex flex-col justify-between bg-neutral text-neutral-content lg:flex-row">
+		<div class="">
+			<a href="/">
+				<img src={ GetPathStr("/assets/images/logo.png") } alt="Logo" class="max-h-12"/>
+			</a>
+		</div>
+		<div hx-get={ GetPathStr("/components/auth-buttons") } hx-trigger="load"></div>
+	</nav>
+}
+
+templ AuthButtons() {
+	<div class="flex flex-row gap-4 items-center">
+		<a href={ GetPathSafeURL("/signup") }>Signup</a>
+		<a href={ GetPathSafeURL("/login") }>Login</a>
+	</div>
+}
+
+//xxx
