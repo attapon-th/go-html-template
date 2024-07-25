@@ -46,6 +46,7 @@ tasks:
   client-gen:
     dir: client
     cmds:
+      - test -d node_modules || npm install
       - pnpm build
 
   mod:
