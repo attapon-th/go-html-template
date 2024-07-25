@@ -2,8 +2,10 @@
 
 version: "3"
 
+interval: 1000ms # set interval for watch mode
 dotenv: # auto load dotenv
   - .env
+
 vars:
   APP_NAME: go-htmx-template # please change me
   APP_VERSION: "4.0"
@@ -35,8 +37,6 @@ tasks:
     cmds:
       - go build --ldflags="{{.GO_LDFLAGS}}" -o ./{{.APP_NAME}}_dev main.go
       - ./{{.APP_NAME}}_dev serv
-
-    interval: "1000ms" # ignore
     sources:
       - "**/*.go"
       - "go.mod"
@@ -44,9 +44,6 @@ tasks:
   teml-gen:
     cmds:
       - templ generate
-    interval: "1000ms" # ignore
-    sources:
-      - "views/**/*.templ"
 
   client-gen:
     dir: client
@@ -54,7 +51,10 @@ tasks:
       - test -d node_modules || npm install
       - pnpm build
   gen:
-    - task teml-gen client-gen
+    cmds:
+      - task teml-gen client-gen --parallel
+    sources:
+      - "views/**/*.templ"
 
   mod:
     cmds:
