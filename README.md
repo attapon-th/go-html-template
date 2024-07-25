@@ -5,8 +5,8 @@
 
 1. go version 1.20 or higher - [go.dev](https://go.dev)
 2. task version 3.0 or higher - [taskfile.dev](https://taskfile.dev)
-3. fiber version 2.0 or higher - [https://github.com/gofiber/fiber](https://github.com/gofiber/fiber)
-4. templ - [https://github.com/a-h/templ](https://github.com/a-h/templ)
+3. templ - for use command: `teml generate` [https://github.com/a-h/templ](https://github.com/a-h/templ)
+4. (Optional) cobra-cli - [https://github.com/spf13/cobra](https://github.com/spf13/cobra)
 
 
 # How to use
