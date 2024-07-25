@@ -23,7 +23,7 @@ package cmd
 
 import (
 	"fmt"
-	"go-html-template/internal/controller"
+	"go-htmx-template/internal/controller"
 	"log/slog"
 
 	"github.com/gofiber/fiber/v2"

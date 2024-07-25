@@ -75,7 +75,7 @@ func initConfig() {
 		viper.AddConfigPath(home)
 		viper.AddConfigPath(".")
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".go-html-template")
+		viper.SetConfigName(".go-htmx-template")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

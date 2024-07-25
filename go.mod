@@ -1,4 +1,4 @@
-module go-html-template
+module go-htmx-template
 
 go 1.22.4
 

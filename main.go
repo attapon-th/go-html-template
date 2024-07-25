@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package main
 
-import "go-html-template/cmd"
+import "go-htmx-template/cmd"
 
 func main() {
 	cmd.Execute()

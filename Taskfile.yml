@@ -5,7 +5,7 @@ version: "3"
 dotenv: # auto load dotenv
   - .env
 vars:
-  APP_NAME: go-html-template # please change me
+  APP_NAME: go-htmx-template # please change me
   APP_VERSION: "4.0"
   APP_BUILD:
     sh: echo "$(git rev-list --count --all || echo \"0\")"

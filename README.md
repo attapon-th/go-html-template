@@ -12,7 +12,7 @@
 # How to use
 
 1. Clone this repo
-2. Replace the text `go-html-template` with the name of `<your go module>` in all file if exists 
+2. Replace the text `go-htmx-template` with the name of `<your go module>` in all file if exists 
 3. copy `example.env` to `.env`
 4. run `task mod gen`
 5. Start your server `task dev`

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"go-html-template/views"
+	"go-htmx-template/views"
 	"log/slog"
 
 	"github.com/gofiber/fiber/v2"
